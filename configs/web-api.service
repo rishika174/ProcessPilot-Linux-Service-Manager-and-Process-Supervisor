@@ -1,0 +1,14 @@
+[Unit]
+Description=REST API Gateway and Application Server
+After=database cache
+Requires=database
+
+[Service]
+ExecStart=/bin/sh -c "echo '[web-api] Express API server listening on :3000' && while true; do sleep 5; done"
+Restart=on-failure
+RestartSec=3
+MaxRestarts=5
+RestartWindowSec=60
+AutoStart=true
+Environment=NODE_ENV=production
+Environment=PORT=3000

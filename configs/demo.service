@@ -1,0 +1,33 @@
+# ProcessPilot Service Definition: demo.service
+[Unit]
+Description=ProcessPilot Sample Application Demo
+After=database cache
+Requires=database
+
+[Service]
+# Executable command to launch
+ExecStart=/bin/sh -c "echo '[demo] Initializing Demo Worker...' && while true; do echo '[demo] Processing queue item at '$(date); sleep 3; done"
+ExecStop=/bin/sh -c "echo '[demo] Gracefully cleaning up state...'"
+WorkingDirectory=/tmp
+
+# Restart policy: 'always', 'on-failure', 'on-abort', or 'no'
+Restart=on-failure
+
+# Delay in seconds before attempting automatic restart
+RestartSec=3
+
+# Maximum restarts allowed within RestartWindowSec before service is considered dead (flapping protection)
+MaxRestarts=5
+RestartWindowSec=60
+
+# Auto-start this service when processpilotd daemon boots
+AutoStart=true
+
+# Environment variables
+Environment=PORT=8080
+Environment=APP_ENV=production
+Environment=LOG_LEVEL=info
+
+# Standard output redirection (optional)
+StandardOutput=journal
+StandardError=journal

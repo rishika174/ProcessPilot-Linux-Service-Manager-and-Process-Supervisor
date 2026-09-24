@@ -1,0 +1,13 @@
+[Unit]
+Description=Redis In-Memory Key-Value Store & Cache
+After=database
+Requires=
+
+[Service]
+ExecStart=/bin/sh -c "echo '[cache] Redis cache running on port 6379' && while true; do sleep 4; done"
+Restart=always
+RestartSec=3
+MaxRestarts=5
+RestartWindowSec=60
+AutoStart=true
+Environment=REDIS_PORT=6379

@@ -1,0 +1,14 @@
+[Unit]
+Description=Core PostgreSQL Relational Database Service
+After=
+Requires=
+
+[Service]
+ExecStart=/bin/sh -c "echo '[db] PostgreSQL 16 engine listening on 5432' && while true; do sleep 5; done"
+Restart=always
+RestartSec=2
+MaxRestarts=5
+RestartWindowSec=60
+AutoStart=true
+Environment=PGDATA=/var/lib/postgresql/data
+Environment=POSTGRES_PORT=5432
